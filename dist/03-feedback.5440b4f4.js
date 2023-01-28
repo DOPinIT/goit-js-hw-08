@@ -509,9 +509,9 @@ const input = document.querySelector("input");
 const submit = document.querySelector("button");
 const textArea = document.querySelector("textarea");
 input.addEventListener("input", (0, _functionsForFormJs.onInput));
-textArea.addEventListener("input", (0, _functionsForFormJs.onTextArea));
+textArea.addEventListener("input", (0, _functionsForFormJs.onInput));
 form.addEventListener("submit", ({ target  })=>{
-    Event.preventDefault();
+    event.preventDefault();
     const { elements: { email , message  }  } = target;
     if (email.value === "" || message.value === "") alert("\u0412\u0441\u0456 \u043F\u043E\u043B\u044F \u043F\u043E\u0432\u0438\u043D\u043D\u0456 \u0431\u0443\u0442\u0438 \u0437\u0430\u043F\u043E\u0432\u043D\u0435\u043D\u0456!");
     else {
@@ -519,7 +519,7 @@ form.addEventListener("submit", ({ target  })=>{
             "email": email.value,
             "message": message.value
         });
-        target.reset();
+        form.reset();
     }
 });
 
