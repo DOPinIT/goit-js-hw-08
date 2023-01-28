@@ -11,13 +11,13 @@ input.addEventListener("input", onInput)
 
 textArea.addEventListener("input", onTextArea)
 
-form.addEventListener("submit", (event) => {
-  event.preventDefault();
-  const { elements: { email, message } } = event.currentTarget;
+form.addEventListener("submit", ({target}) => {
+  Event.preventDefault();
+  const { elements: { email, message } } = target;
   if (email.value === "" || message.value === "") {
       alert("Всі поля повинні бути заповнені!");
   } else {
       console.log({ "email": email.value, "message": message.value });
-      form.reset();
+      target.reset();
   }
 })
