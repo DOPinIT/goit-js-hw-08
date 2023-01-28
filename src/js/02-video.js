@@ -5,22 +5,14 @@ const iFrame = document.getElementById("vimeo-player")
 
 const player = new Player(iFrame);
 
-    player.on('play', function() {
-        console.log('played the video!');
-    });
-
-    player.getVideoTitle().then(function(title) {
-        console.log('title:', title);
-    });
-
-const onPlay = 
-    player.on("timeupdate", function sec(sec) {
-     player.getCurrentTime(sec).then(function (seconds) {
-         console.log(seconds, "current seconds ");
-        });
-    });
 
 
-iFrame.addEventListener("click", onPlay)
+    player.on("timeupdate", throttle(function (sec) {
+        localStorage.setItem("videoplayer-current-time", sec.seconds);
+    }, 1000)
+    );
+
+player.setCurrentTime(localStorage.getItem("videoplayer-current-time"))
+
 
 

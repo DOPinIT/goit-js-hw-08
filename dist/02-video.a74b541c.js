@@ -510,20 +510,12 @@ var _lodashThrottle = require("lodash.throttle");
 var _lodashThrottleDefault = parcelHelpers.interopDefault(_lodashThrottle);
 const iFrame = document.getElementById("vimeo-player");
 const player = new (0, _playerDefault.default)(iFrame);
-player.on("play", function() {
-    console.log("played the video!");
-});
-player.getVideoTitle().then(function(title) {
-    console.log("title:", title);
-});
-const onPlay = player.on("timeupdate", function sec(_sec) {
-    player.getCurrentTime(_sec).then(function(seconds) {
-        console.log(seconds, "current seconds ");
-    });
-});
-iFrame.addEventListener("click", onPlay);
+player.on("timeupdate", (0, _lodashThrottleDefault.default)(function(sec) {
+    localStorage.setItem("videoplayer-current-time", sec.seconds);
+}, 1000));
+player.setCurrentTime(localStorage.getItem("videoplayer-current-time"));
 
-},{"@vimeo/player":"kmmUG","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","lodash.throttle":"bGJVT"}],"kmmUG":[function(require,module,exports) {
+},{"@vimeo/player":"kmmUG","lodash.throttle":"bGJVT","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"kmmUG":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 var global = arguments[3];
